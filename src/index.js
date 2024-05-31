@@ -1,5 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
+import "./index.css";
 
 const pizzaData = [
   {
@@ -48,25 +49,60 @@ const pizzaData = [
 
 function App() {
   return (
-    <div>
+    <div className="container">
       <Header />
       <Menu />
       <Footer />
     </div>
   );
 }
+// STyles..
+//************************************
+const style = {
+  color: "Yellow",
+  fontSize: "52px",
+  textTransform: "uppercase",
+};
+// ***************************************************
 
 function Header() {
-  return <h1> Cheesify Pizza </h1>;
+  return (
+    <header className="header">
+      <h1 style={style}> Pizza House </h1>;
+    </header>
+  );
 }
 
 function Menu() {
   return (
-    <div>
-      <h1> Our Menu </h1>
-      <Pizza />
-      <Pizza />
-      <Pizza />
+    <main className="menu">
+      <h2> Our Menu </h2>
+      <Pizza
+        name="Pizza Spinachi"
+        photoName="pizzas/spinaci.jpg"
+        ingrediants="Tomato, mozarella, spinach, and ricotta cheese"
+        price={12}
+      />
+      <Pizza
+        name="Pizza Funghi"
+        photoName="pizzas/Funghi.jpg"
+        ingrediants="Tomato, mozarella, spinach, and ricotta cheese"
+        price={12}
+      />
+    </main>
+  );
+}
+
+function Pizza(props) {
+  console.log(props);
+  return (
+    <div className="pizza">
+      <img src={props.photoName} alt={props.photoName} />
+      <div>
+        <h3>{props.name} </h3>
+        <p>{props.ingrediants}</p>
+        <span>{props.price}</span>
+      </div>
     </div>
   );
 }
@@ -83,19 +119,12 @@ function Footer() {
   // else alert("Sorry we're closed");
 
   return (
-    <footer> {new Date().toLocaleDateString()}. We're Currently Open </footer>
+    <footer className="footer">
+      {" "}
+      {new Date().toLocaleDateString()}. We're Currently Open{" "}
+    </footer>
   );
   // return React.createElement("footer", null, "We ar'e Opened");
-}
-
-function Pizza() {
-  return (
-    <div>
-      <img src="pizzas/spinaci.jpg" alt="pizza spinachi" />
-      <h3>Pizza Spinachi </h3>
-      <p>Tomato, mozarella, spinach, and ricotta cheese</p>
-    </div>
-  );
 }
 
 // React 18
