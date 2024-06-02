@@ -68,7 +68,7 @@ const style = {
 function Header() {
   return (
     <header className="header">
-      <h1 style={style}> Pizza House </h1>;
+      <h1 style={style}> Pizza~House </h1>;
     </header>
   );
 }
@@ -77,18 +77,12 @@ function Menu() {
   return (
     <main className="menu">
       <h2> Our Menu </h2>
-      <Pizza
-        name="Pizza Spinachi"
-        photoName="pizzas/spinaci.jpg"
-        ingrediants="Tomato, mozarella, spinach, and ricotta cheese"
-        price={12}
-      />
-      <Pizza
-        name="Pizza Funghi"
-        photoName="pizzas/Funghi.jpg"
-        ingrediants="Tomato, mozarella, spinach, and ricotta cheese"
-        price={12}
-      />
+
+      <ul className="pizzas">
+        {pizzaData.map((pizza) => (
+          <Pizza pizzaObj={pizza} key={pizza.name} />
+        ))}
+      </ul>
     </main>
   );
 }
@@ -96,14 +90,14 @@ function Menu() {
 function Pizza(props) {
   console.log(props);
   return (
-    <div className="pizza">
-      <img src={props.photoName} alt={props.photoName} />
+    <li className="pizza">
+      <img src={props.pizzaObj.photoName} alt={props.pizzaObj.photoName} />
       <div>
-        <h3>{props.name} </h3>
-        <p>{props.ingrediants}</p>
-        <span>{props.price}</span>
+        <h3>{props.pizzaObj.name} </h3>
+        <p>{props.pizzaObj.ingredients}</p>
+        <span>${props.pizzaObj.price}</span>
       </div>
-    </div>
+    </li>
   );
 }
 
