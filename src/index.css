@@ -34,7 +34,7 @@ body {
 /* *************** */
 
 .header {
-  align-self: last stretch;
+  align-self: stretch;
 }
 
 .header h1 {
@@ -108,6 +108,10 @@ body {
 .pizza {
   display: flex;
   gap: 3.2rem;
+}
+
+.pizza:hover {
+  cursor: pointer;
 }
 
 .pizza img {

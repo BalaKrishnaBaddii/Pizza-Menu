@@ -58,17 +58,17 @@ function App() {
 }
 // STyles..
 //************************************
-const style = {
-  color: "Yellow",
-  fontSize: "52px",
-  textTransform: "uppercase",
-};
+// const style = {
+//   color: "Yellow",
+//   fontSize: "52px",
+//   textTransform: "uppercase",
+// };
 // ***************************************************
 
 function Header() {
   return (
     <header className="header">
-      <h1 style={style}> Pizza House </h1>
+      <h1 className="header h1"> Pizza House </h1>
     </header>
   );
 }
@@ -82,11 +82,19 @@ function Menu() {
     <main className="menu">
       <h2> Our Menu </h2>
       {pizzaNum > 0 ? (
-        <ul className="pizzas">
-          {pizzas.map((pizza) => (
-            <Pizza pizzaObj={pizza} key={pizza.name} />
-          ))}
-        </ul>
+        // React Fregment will allow to combine two elements.
+        // <React.Fragment>
+        <>
+          <p>
+            Authentic italian cuisine. 6 creative dishes to choose from. All
+            from our stone oven, all organic, delicious.
+          </p>
+          <ul className="pizzas">
+            {pizzas.map((pizza) => (
+              <Pizza pizzaObj={pizza} key={pizza.name} />
+            ))}
+          </ul>
+        </>
       ) : (
         <p>We're still working on our menu please comback later!</p>
       )}
@@ -95,14 +103,14 @@ function Menu() {
 }
 
 function Pizza({ pizzaObj }) {
-  if (pizzaObj.soldOut) return null;
+  // if (pizzaObj.soldOut) return null;
   return (
-    <li className="pizza">
+    <li className={pizzaObj.soldOut ? "pizza sold-out" : "pizza"}>
       <img src={pizzaObj.photoName} alt={pizzaObj.photoName} />
       <div>
         <h3>{pizzaObj.name} </h3>
         <p>{pizzaObj.ingredients}</p>
-        <span>${pizzaObj.price}</span>
+        <span>{pizzaObj.soldOut ? "Sold Out" : "$" + pizzaObj.price}</span>
       </div>
     </li>
   );
@@ -110,10 +118,11 @@ function Pizza({ pizzaObj }) {
 
 function Footer() {
   const hour = new Date().getHours();
-  const startHour = 10;
-  const endHour = 22;
+  console.log(hour);
+  const startHour = 13;
+  const endHour = 23;
   const isOpen = hour >= startHour && hour <= endHour;
-  console.log(isOpen);
+  console.log(isOpen + " here ");
 
   // if (hour >= startHour && hour <= endHour) alert("We're Currently Open");
   // else alert("Sorry we're closed");
@@ -123,7 +132,13 @@ function Footer() {
         <Order endHour={endHour} startHour={startHour} />
       ) : (
         <p>
-          We're Happy to welcome you between {startHour} and {endHour}:00
+          We're Happy to welcome you between{" "}
+          {startHour < 12 ? startHour + ":00 AM" : startHour + ":00 PM"} and{" "}
+          {endHour === 0
+            ? endHour + 12 + ":00 AM"
+            : endHour >= 12
+            ? endHour - 12 + ":00 PM"
+            : endHour - 12 + ":00 AM"}
         </p>
       )}
       {/* {new Date().toLocaleDateString()}. We're Currently Open{" "} */}
@@ -137,8 +152,10 @@ function Order({ startHour, endHour }) {
   return (
     <div className="order">
       <p>
-        We're currently Opened fron {startHour}:00 till {endHour}:00. come visit
-        or order online{" "}
+        We're currently Opened from{" "}
+        {startHour < 12 ? startHour + ":00 AM" : startHour - 12 + ":00 PM"} till{" "}
+        {endHour >= 12 ? endHour - 12 + ":00 PM" : endHour + ":00 AM"}. Come
+        visit or order online{" "}
       </p>
       <button className="btn">Order</button>
     </div>
