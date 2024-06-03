@@ -34,7 +34,7 @@ body {
 /* *************** */
 
 .header {
-  align-self: stretch;
+  align-self: last stretch;
 }
 
 .header h1 {
@@ -57,7 +57,7 @@ body {
   display: block;
   content: "";
   height: 3px;
-  width: 12rem;
+  width: 4rem;
   background-color: #edc84b;
   position: absolute;
   top: calc(50% - 1px);
@@ -101,7 +101,7 @@ body {
 .pizzas {
   list-style: none;
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-columns: 1fr 1fr;
   gap: 4.8rem;
 }
 
